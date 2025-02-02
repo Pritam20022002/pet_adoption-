@@ -1,0 +1,19 @@
+{
+  "name": "pet_adoption-",
+  "version": "1.0.0",
+  "description": "pet adoption",
+  "main": "backend/server.js",
+  "scripts": {
+  "start": "node backend/server.js",
+  "dev": "nodemon backend/server.js"
+  },
+  "author": "Pritam",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  }
+}
