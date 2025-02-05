@@ -1,7 +1,6 @@
 const express = require("express");
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const { Pool } = require("pg"); // PostgreSQL client
@@ -16,9 +15,6 @@ app.use(cors({
   allowedHeaders: "Content-Type",
   credentials: true
 }));
-// Serve static files (uploaded images)
-// app.use("/uploads", express.static("uploads"));
-app.use('/uploads', express.static(path.join(__dirname, 'backend/uploads')));
 
 //serving static files
 app.use(express.static('frontend'));
@@ -105,16 +101,6 @@ app.post('/login', async (req, res) => {
 // Middleware to parse incoming JSON data
 app.use(express.json());
 
-
-
-// // Get all pet ads (or filter by type)
-// const storage = multer.diskStorage({
-//   destination: "backend/uploads/", // Store uploaded files here
-//   filename: (req, file, cb) => {
-//     console.log(`Uploading file: ${file.originalname}`);
-//     cb(null, Date.now() + path.extname(file.originalname)); // Create a unique filename
-//   }
-// });
 
 // Configure multer for handling image uploads
 const storage = multer.memoryStorage(); // Store the file in memory (as buffer)
@@ -208,9 +194,29 @@ app.delete("/ads/:id", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+// Get ads by pet type
+app.get("/ads", async (req, res) => {
+  try {
+    const petType = req.query.petType;
 
+    if (!petType) {
+      return res.status(400).json({ error: "petType query parameter is required" });
+    }
 
+    const query = "SELECT * FROM ads WHERE pet_type = $1";
+    const result = await pool.query(query, [petType]);
 
+    const ads = result.rows.map(ad => ({
+      ...ad,
+      image_url: `/ads/${ad.id}/image` // Append image URL to each ad
+    }));
+
+    res.json(ads);
+  } catch (err) {
+    console.error("Error fetching ads by pet type:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
 // Start the server
 const PORT = process.env.PORT || 5000;
