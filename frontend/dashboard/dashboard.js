@@ -31,22 +31,23 @@ window.onload = async function () {
 function displayAds(ads) {
     const container = document.getElementById("ads-container");
     container.innerHTML = ""; // Clear previous ads
-
+  
     ads.forEach(ad => {
-        const adElement = document.createElement("div");
-        adElement.classList.add("ad-item");
-        adElement.innerHTML = `
-            <h3>${ad.pet_name}</h3>
-            <p>Type: ${ad.pet_type}</p>
-            <p>Location: ${ad.location}</p>
-            <p>Contact: ${ad.contact_details}</p>
-            <img src="${ad.image_url}" alt="Pet Image" style="width: 200px; height: auto;">
-            <img src="/backend/uploads/1738737939536.jpg" alt="Pet Image" style="width: 200px; height: auto;">
-            <button onclick="deleteAd(${ad.id})">Delete</button>
-        `;
-        container.appendChild(adElement);
+      const adElement = document.createElement("div");
+      adElement.classList.add("ad-item");
+      adElement.innerHTML = `
+          <h3>${ad.pet_name}</h3>
+          <p>Type: ${ad.pet_type}</p>
+          <p>Location: ${ad.location}</p>
+          <p>Contact: ${ad.contact_details}</p>
+          <img src="http://localhost:5000/ads/${ad.id}/image" alt="Pet Image" style="width: 200px; height: auto;">
+          <button onclick="deleteAd(${ad.id})">Delete</button>
+      `;
+      container.appendChild(adElement);
     });
-}
+  }
+  
+
 
 async function deleteAd(adId) {
     try {
@@ -64,3 +65,7 @@ async function deleteAd(adId) {
         console.error("An error occurred while deleting the ad:", err);
     }
 }
+document.getElementById("logout-btn").addEventListener("click", function () {
+    sessionStorage.clear();  // Clears all session storage data
+    window.location.href = "../index.html";  // Redirect to login page
+});

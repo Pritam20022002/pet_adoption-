@@ -11,7 +11,7 @@ const bcrypt = require('bcrypt');
 const app = express();
 
 app.use(cors({
-  origin: "http://127.0.0.1:5500", // Allow only your frontend
+  origin: "*", // Allow only your frontend
   methods: "GET, POST , DELETE", // Allow necessary HTTP methods
   allowedHeaders: "Content-Type",
   credentials: true
@@ -102,89 +102,41 @@ app.post('/login', async (req, res) => {
 });
 
 
-// Set up multer to store images in the "uploads/" folder
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'uploads/'); // Store in uploads folder
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
-//   }
-// });
-
-// const upload = multer({ storage: storage });
-
 // Middleware to parse incoming JSON data
 app.use(express.json());
 
-// Create an API endpoint to handle file upload
-// app.post('/upload', upload.single('image'), (req, res) => {
-//   const imageUrl = `http://localhost:5000/uploads/${req.file.filename}`;
-  
-//   // Insert the image URL and other ad details into the PostgreSQL database
-//   const { pet_name, pet_type, location, contact_details } = req.body;
-//   const query = 'INSERT INTO ads (pet_name, pet_type, location, contact_details, image_url) VALUES ($1, $2, $3, $4, $5)';
-  
-//   pool.query(query, [pet_name, pet_type, location, contact_details, imageUrl], (err, result) => {
-//     if (err) {
-//       console.error('Error inserting ad into database', err);
-//       return res.status(500).send('Database error');
-//     }
-//     res.status(200).send('Ad with image uploaded successfully');
-//   });
+
+
+// // Get all pet ads (or filter by type)
+// const storage = multer.diskStorage({
+//   destination: "backend/uploads/", // Store uploaded files here
+//   filename: (req, file, cb) => {
+//     console.log(`Uploading file: ${file.originalname}`);
+//     cb(null, Date.now() + path.extname(file.originalname)); // Create a unique filename
+//   }
 // });
 
-// Get all pet ads (or filter by type)
-app.get("/ads", async (req, res) => {
-  try {
-    const { petType } = req.query;
-    let query = "SELECT * FROM ads";
-    let values = [];
-
-    if (petType) {
-      query += " WHERE pet_type = $1";
-      values.push(petType);
-    }
-
-    const result = await pool.query(query, values);
-    res.json(result.rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// Configure Multer for storing uploaded files
-const storage = multer.diskStorage({
-  destination: "backend/uploads/", // Ensure this folder exists
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // Unique file name
-  },
-});
-
+// Configure multer for handling image uploads
+const storage = multer.memoryStorage(); // Store the file in memory (as buffer)
 const upload = multer({ storage: storage });
-
 // Post a new pet ad
 app.post("/ads", upload.single("image"), async (req, res) => {
   try {
     const { pet_name, pet_type, location, contact_details, user_id } = req.body;
 
-    // Check if user_id is provided
     if (!user_id) {
       return res.status(400).json({ error: "User ID is required" });
     }
 
-    // Ensure a file is uploaded
     if (!req.file) {
       return res.status(400).json({ error: "Image file is required" });
     }
 
-    // Construct the image URL
-    const imageUrl = `http://localhost:5000/uploads/${req.file.filename}`;
+    const imageBuffer = req.file.buffer;
 
-    // Insert into the database
     const result = await pool.query(
       "INSERT INTO ads (pet_name, pet_type, location, contact_details, image_url, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-      [pet_name, pet_type, location, contact_details, imageUrl, user_id]
+      [pet_name, pet_type, location, contact_details, imageBuffer, user_id]
     );
 
     res.status(201).json({ success: true, message: "Ad posted successfully", ad: result.rows[0] });
@@ -193,15 +145,36 @@ app.post("/ads", upload.single("image"), async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+app.get("/ads/:id/image", async (req, res) => {
+  try {
+    const adId = req.params.id;
+    // Correct the query
+    const query = 'SELECT image_url FROM ads WHERE id = $1';
+    const result = await pool.query(query, [adId]);
 
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Ad not found' });
+    }
+
+    const imageBuffer = result.rows[0].image_url;
+
+    res.setHeader('Content-Type', 'image/jpeg'); // Set the content type to image/jpeg
+
+    res.send(imageBuffer); // Send the binary data
+  } catch (err) {
+    console.error('Error retrieving image:', err);
+    res.status(500).json({ error: err.message }); // Keep json for error
+  }
+});
 
 
 // Dashboard
 app.get("/dashboard", (req, res) => {
-  const userId = req.query.user_id; // Get user_id from query parameters
+  const userId = req.query.user_id;
   if (!userId) {
     return res.status(400).send('User ID is missing');
   }
+
   const query = 'SELECT * FROM ads WHERE user_id = $1';
   
   pool.query(query, [userId], (err, result) => {
@@ -209,7 +182,13 @@ app.get("/dashboard", (req, res) => {
       console.error('Error fetching user ads', err);
       return res.status(500).send('Database error');
     }
-    res.json(result.rows); // Send the user-specific ads as JSON
+
+    const ads = result.rows.map(ad => ({
+      ...ad,
+      image_url: `/ads/${ad.id}/image`
+    }));
+
+    res.json(ads);
   });
 });
 
@@ -218,36 +197,18 @@ app.delete("/ads/:id", async (req, res) => {
   const adId = req.params.id;
 
   try {
-      // Fetch the ad to get the image file path before deleting
-      const result = await pool.query("SELECT image_url FROM ads WHERE id = $1", [adId]);
+    // No need to fetch image_url here
+    // Delete the ad from the database
+    await pool.query("DELETE FROM ads WHERE id = $1", [adId]);
 
-      if (result.rows.length === 0) {
-          return res.status(404).json({ error: "Ad not found" });
-      }
-
-      // Extract image filename from the URL
-      const imageUrl = result.rows[0].image_url;
-      const imagePath = path.join(__dirname, "uploads", path.basename(imageUrl));
-
-      // Delete the ad from the database
-      await pool.query("DELETE FROM ads WHERE id = $1", [adId]);
-
-      // Check if the image exists and delete it
-      fs.unlink(imagePath, (err) => {
-          if (err) {
-              console.error("Error deleting image file:", err);
-          } else {
-              console.log("Image file deleted successfully:", imagePath);
-          }
-      });
-
-      res.json({ message: "Ad and image deleted successfully" });
+    res.json({ message: "Ad deleted successfully" });
 
   } catch (err) {
-      console.error("Error deleting ad:", err);
-      res.status(500).json({ error: "Server error" });
+    console.error("Error deleting ad:", err);
+    res.status(500).json({ error: "Server error" });
   }
 });
+
 
 
 
