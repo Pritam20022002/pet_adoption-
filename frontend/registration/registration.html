@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Register</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="login-form">
+    <div class="register-container">
+        <h2>Register</h2>
+        <form id="register-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
             <label for="mobile_number">Mobile Number:</label>
             <input type="text" id="mobile_number" name="mobile_number" required>
-            
+
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            
-            <button type="submit">Login</button>
+
+            <button type="submit">Register</button>
         </form>
-        <p>Don't have an account? <a href="registration/registration.html">Register here</a></p>
+        <p>Already have an account? <a href="../index.html">Login here</a></p>
         <p id="error-message" class="error"></p>
     </div>
-    <script src="script.js"></script>
+    <script src="registration.js"></script>
 </body>
 </html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Ad</title>
+    <link rel="stylesheet" href="../post_ad/post_ad.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <ul class="navbar">
+        <li><a href="../home/home.html">Home</a></li>
+        <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+        <li><a href="../index.html" id="logout">Logout</a></li>
+    </ul>
+
+    <div class="post-ad-container">
+        <h2>Post an Ad</h2>
+        <form id="post-ad-form">
+            <label for="pet_name">Pet Name:</label>
+            <input type="text" id="pet_name" name="pet_name" required>
+
+            <label for="pet_type">Pet Type:</label>
+            <select id="pet_type" name="pet_type" required>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+                <option value="Bird">Bird</option>
+            </select>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="contact_details">Contact Details:</label>
+            <input type="text" id="contact_details" name="contact_details" required>
+
+            <label for="image">Pet Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+
+            <button type="submit">Post Ad</button>
+        </form>
+    </div>
+    <div id="error-message" style="color: red; font-weight: bold;"></div>
+
+
+    <script src="../post_ad/post_ad.js"></script> <!-- Link to your JS file -->
+</body>
+</html>

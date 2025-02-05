@@ -1,21 +1,27 @@
-document.getElementById("loginForm").addEventListener("submit", async function (event) {
-    event.preventDefault(); // Prevent form from reloading the page
+document.getElementById("login-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-    const mobile = document.getElementById("mobile").value;
+    const mobile_number = document.getElementById("mobile_number").value;
     const password = document.getElementById("password").value;
 
-    const response = await fetch("http://localhost:5000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mobile_number: mobile, password: password })
-    });
+    try {
+        const response = await fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ mobile_number, password }),
+        });
 
-    const data = await response.json();
+        const data = await response.json();
 
-    if (response.ok) {
-        localStorage.setItem("user_id", data.userId); // Store user ID
-        window.location.href = "dashboard.html"; // Redirect to dashboard
-    } else {
-        document.getElementById("error-message").textContent = data.message;
+        if (response.ok) {
+            sessionStorage.setItem("userId", data.userId); // Store user ID in sessionStorage
+            window.location.href = "home/home.html"; // Redirect to home page
+        } else {
+            // Handle error response from server
+            document.getElementById("error-message").innerText = data.message || "Login failed";
+        }
+    } catch (error) {
+        // Handle network errors
+        document.getElementById("error-message").innerText = "An error occurred. Please try again later.";
     }
 });

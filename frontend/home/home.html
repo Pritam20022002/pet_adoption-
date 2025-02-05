@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Pet Adoption</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">PetAdopt</div>
+        <ul class="navbar">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="/frontend/dashboard/dashboard.html">Dashboard</a></li>
+            <li><button id="logout-btn">Logout</button></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <div class="left-side">
+            <h2>Adopt a Pet Today!</h2>
+            <p>Find the perfect pet for you and give them a loving home.</p>
+        </div>
+        <div class="right-side">
+            <img src="https://via.placeholder.com/300" alt="Pet Image" />
+        </div>
+    </div>
+
+    <div class="bottom-options">
+        <button onclick="location.href='ads.html?petType=dog'">Dogs</button>
+        <button onclick="location.href='ads.html?petType=cat'">Cats</button>
+        <button onclick="location.href='ads.html?petType=bird'">Birds</button>
+    </div>
+
+    <script src="home.js"></script>
+</body>
+</html>

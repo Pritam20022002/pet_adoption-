@@ -8,7 +8,7 @@ body {
     color: white;
 }
 
-.login-container {
+.register-container {
     background: #333;
     padding: 20px;
     border-radius: 8px;
@@ -28,3 +28,15 @@ button {
     cursor: pointer;
 }
 
+a {
+    color: #ff9800;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: red;
+}
