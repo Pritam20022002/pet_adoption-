@@ -7,30 +7,49 @@
     <link rel="stylesheet" href="home.css">
 </head>
 <body>
-    <nav>
+    <nav> 
         <div class="logo">PetAdopt</div>
         <ul class="navbar">
             <li><a href="home.html">Home</a></li>
             <li><a href="/frontend/dashboard/dashboard.html">Dashboard</a></li>
-            <li><button id="logout-btn">Logout</button></li>
+            <li><button id="logout-btn">Log out</button></li>
         </ul>
     </nav>
 
     <div class="main-content">
         <div class="left-side">
-            <h2>Adopt a Pet Today!</h2>
+            <h1>Bring home a new best friend by adopting</h1>
             <p>Find the perfect pet for you and give them a loving home.</p>
         </div>
         <div class="right-side">
-            <img src="https://via.placeholder.com/300" alt="Pet Image" />
+            <img src="https://c02.purpledshub.com/uploads/sites/41/2020/10/GettyImages-1194409229-crop-4477e44.jpg?w=728&webp=1" alt="Pet Image" />
         </div>
     </div>
 
     <div class="bottom-options">
-        <button onclick="location.href='../animals/animal.html?petType=Dog'">Dogs</button>
-        <button onclick="location.href='../animals/animal.html?petType=Cat'">Cats</button>
-        <button onclick="location.href='../animals/animal.html?petType=Bird'">Birds</button>
+        <button id="dog" class="animal" onclick="location.href='../animals/animal.html?petType=Dog'">
+            <div class="text-content">
+                <!-- <h2> Dogs </h2> -->
+                <img class="animal_logo" src="/frontend/dog.png" alt="Dog Logo">
+            </div>
+            <img class="logo-bottom" src="/frontend/arrow.png" alt="Second Logo">
+        </button>
+        <button id="cat" class="animal" onclick="location.href='../animals/animal.html?petType=Cat'">
+            <div class="text-content">
+                <!-- <h2> Cats </h2> -->
+                <img class="animal_logo" src="/frontend/cat.png" alt="Cat Logo">
+            </div>
+            <img class="logo-bottom" src="/frontend/arrow.png" alt="Second Logo">
+        </button>
+        <button id="bird" class="animal" onclick="location.href='../animals/animal.html?petType=Bird'">
+            <div class="text-content">
+                <!-- <h2> Birds </h2> -->
+                <img class="animal_logo" src="/frontend/bird.png" alt="Bird Logo">
+            </div>
+            <img class="logo-bottom" src="/frontend/arrow.png" alt="Second Logo">
+        </button>
     </div>
+    
     
 
     <script src="home.js"></script>

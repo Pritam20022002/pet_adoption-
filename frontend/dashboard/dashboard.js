@@ -33,18 +33,24 @@ function displayAds(ads) {
     container.innerHTML = ""; // Clear previous ads
   
     ads.forEach(ad => {
-      const adElement = document.createElement("div");
-      adElement.classList.add("ad-item");
-      adElement.innerHTML = `
-          <h3>${ad.pet_name}</h3>
-          <p>Type: ${ad.pet_type}</p>
-          <p>Location: ${ad.location}</p>
-          <p>Contact: ${ad.contact_details}</p>
-          <img src="http://localhost:5000/ads/${ad.id}/image" alt="Pet Image" style="width: 200px; height: auto;">
-          <button onclick="deleteAd(${ad.id})">Delete</button>
-      `;
-      container.appendChild(adElement);
+        const adElement = document.createElement("div");
+        adElement.classList.add("ad-item");
+    
+        adElement.innerHTML = `
+            <div class="ad-details">
+                <h3>${ad.pet_name}</h3>
+                <p>Type: ${ad.pet_type}</p>
+                <p>Location: ${ad.location}</p>
+                <p>Contact: ${ad.contact_details}</p>
+                <button onclick="deleteAd(${ad.id})">Remove AD</button>
+            </div>
+            <img src="http://localhost:5000/ads/${ad.id}/image" alt="Pet Image" class="ad-image">
+        `;
+    
+        container.appendChild(adElement);
     });
+    
+    
   }
   
 

@@ -6,25 +6,78 @@ body {
     height: 100vh;
     background-color: #222;
     color: white;
+    margin: 0;
 }
 
 .login-container {
     background: #333;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
     text-align: center;
+    width: 300px; /* Reduced width */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-input, button {
-    width: 100%;
-    margin: 8px 0;
+h2 {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-size: 14px; /* Smaller font size */
+    text-align: left; /* Aligned to the left */
+    margin: 8px 0 4px 10px;
+    color: #ccc;
+}
+
+input {
+    width: 90%;
     padding: 10px;
+    border-radius: 20px; /* Rounded corners */
+    border: none;
+    outline: none;
+    font-size: 14px; /* Smaller font size */
 }
 
 button {
+    width: 95%;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 20px; /* Rounded corners */
     background: #ff9800;
     border: none;
     color: white;
     cursor: pointer;
+    transition: background 0.3s ease;
 }
 
+button:hover {
+    background: #e68900;
+}
+
+p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+p a {
+    color: #ff9800; /* Orange color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+p a:hover {
+    color: #e68900; /* Darker orange on hover */
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+.register-container {
+    background: #333;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
