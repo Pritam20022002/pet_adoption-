@@ -3,27 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <title>Display Ads - Pet Adoption</title>
+    <link rel="stylesheet" href="display_ads.css">
 </head>
 <body>
-    <!-- Navbar -->
     <nav>
         <div class="logo">PetAdopt</div>
         <ul class="navbar">
             <li><a href="../home/home.html">Home</a></li>
-            <li><a href="../post_ad/post_ad.html">Post an Ad</a></li>
+            <li><a href="/frontend/dashboard/dashboard.html">Dashboard</a></li>
             <li><button id="logout-btn">Log out</button></li>
         </ul>
     </nav>
 
-    <div class="dashboard-container">
-        <h2>Your Ads for adoption</h2>
+    <div class="main-content">
+        <h1 id="page-title">Loading...</h1>
         <div id="ads-container">
-            <!-- Dynamic Ads will be inserted here -->
+            
         </div>
     </div>
 
-    <script src="dashboard.js"></script>
+    <script src="display_ads.js"></script>
 </body>
 </html>

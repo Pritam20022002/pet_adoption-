@@ -7,14 +7,20 @@
     <link rel="stylesheet" href="../post_ad/post_ad.css"> <!-- Link to your CSS file -->
 </head>
 <body>
-    <ul class="navbar">
-        <li><a href="../home/home.html">Home</a></li>
-        <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
-        <li><a href="../index.html" id="logout">Logout</a></li>
-    </ul>
+    <nav>
+        <!-- Logo Text on the left -->
+        <div class="logo">PetAdopt</div> <!-- Logo text -->
+
+        <!-- Navbar Links and Logout Button on the right -->
+        <ul class="navbar">
+            <li><a href="../home/home.html">Home</a></li>
+            <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+            <li><button id="logout-btn">Log out</button></li>
+        </ul>
+    </nav>
 
     <div class="post-ad-container">
-        <h2>Post an Ad</h2>
+        <h2>Post an Adoption</h2>
         <form id="post-ad-form">
             <label for="pet_name">Pet Name:</label>
             <input type="text" id="pet_name" name="pet_name" required>
@@ -39,7 +45,6 @@
         </form>
     </div>
     <div id="error-message" style="color: red; font-weight: bold;"></div>
-
 
     <script src="../post_ad/post_ad.js"></script> <!-- Link to your JS file -->
 </body>

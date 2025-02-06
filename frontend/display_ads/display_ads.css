@@ -1,0 +1,143 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Varela+Round&display=swap');
+
+body {
+    font-family: "Varela Round", serif;
+    background-color: #000; /* Black background */
+    margin: 10px;
+    padding: 0;
+    color: white; /* Text color changed to white for contrast */
+    overflow: auto;
+}
+
+/* Navbar */
+nav {
+    background-color: #000; /* Same black as body */
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 18px; /* Smaller font size for the logo text */
+    font-weight: bold;
+    color: #ff9800; /* Orange color for the logo text */
+}
+
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.navbar li {
+    margin: 0 15px; /* Reduced margin between items */
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #ff9800; /* Orange hover effect */
+}
+
+/* Logout Button */
+#logout-btn {
+    background-color: #ff9800;
+    border: none;
+    padding: 8px 15px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background 0.3s ease;
+}
+
+#logout-btn:hover {
+    background-color: #e53d32;
+}
+
+/* Main Content */
+.main-content {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Ads Container */
+#ads-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Individual Ad */
+.ad {
+    background-color: #222; /* Dark background for ad */
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px;
+    width: 300px; /* Adjusted width */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    overflow: hidden; /* Ensure content stays within bounds */
+    display: flex;
+    flex-direction: row; /* Horizontal layout for content */
+    align-items: center;
+}
+
+.ad:hover {
+    transform: scale(1.5);
+    border: 2px solid greenyellow;
+}
+
+.ad-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.ad-details {
+    width: 70%; /* Adjusted width to take more space */
+    text-align: left;
+    display: flex;
+    flex-direction: column; /* Stack the details vertically */
+}
+
+.ad-details h2 {
+    font-size: 18px;
+    color: #ff9800;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.ad-details p {
+    font-size: 14px;
+    color: #ddd;
+    margin: 5px 0;
+}
+
+.ad img {
+    width: 80%; /* Adjusted image width to 30% */
+    height: auto;
+    border-radius: 8px;
+    margin-left: 15px; /* Reduced space between image and text */
+}
+
+/* Heading Style */
+h1 {
+    color: #ff9800; /* Orange color for page title */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}

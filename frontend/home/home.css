@@ -5,11 +5,12 @@ body {
     background-color: #000; /* Black background */
     color: white;
     margin: 10px;
+    overflow: auto;
 }
 
 nav {
     background-color: #000; /* Same black as body */
-    padding: 15px;
+    padding: 15px; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -86,7 +87,7 @@ button {
 }
 
 button:hover {
-    background-color: #e68900;
+    background-color: #e53d32;
 }
 
 .bottom-options {
@@ -107,6 +108,10 @@ button:hover {
     justify-content: space-between;  /* Distribute space between text and logos */
     align-items: center; /* Center the content */
     padding: 20px;
+}
+.animal:hover{
+    border: 5px solid #ff9800;
+    padding: 30px;
 }
 
 #dog {
@@ -222,4 +227,8 @@ button:hover {
         font-size: 10px;  /* Even smaller button text */
         padding: 6px 15px;  /* Adjust padding for small screens */
     }
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }

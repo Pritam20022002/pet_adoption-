@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    document.getElementById("page-title").textContent = `Available ${petType.charAt(0).toUpperCase() + petType.slice(1)}s`;
+    document.getElementById("page-title").textContent = `Available ads for ${petType.charAt(0).toUpperCase() + petType.slice(1)} adoption`;
 
     try {
         const response = await fetch(`http://localhost:5000/ads?petType=${petType}`);
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         adsContainer.innerHTML = ""; // Clear existing content
 
         if (ads.length === 0) {
-            adsContainer.innerHTML = "<p>No ads found for this category.</p>";
+            adsContainer.innerHTML = "<p>No ads available for this category.</p>";
             return;
         }
 
@@ -26,11 +26,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             adElement.classList.add("ad");
 
             adElement.innerHTML = `
+            <div class="ad-details">
                 <h2>${ad.pet_name}</h2>
-                <p>Location: ${ad.location}</p>
-                <p>Contact: ${ad.contact_details}</p>
+                <p><strong>Location:</strong><br> ${ad.location}</p>
+                <p><strong>Contact:</strong> ${ad.contact_details}</p>
+            </div>
+            <div class="ad-image">
                 <img src="http://localhost:5000/ads/${ad.id}/image" alt="${ad.pet_name}">
-            `;
+            </div>
+        `;
 
             adsContainer.appendChild(adElement);
         });
@@ -38,4 +42,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Error fetching ads:", error);
         document.getElementById("ads-container").innerHTML = "<p>Failed to load ads. Please try again later.</p>";
     }
+});
+document.getElementById("logout-btn").addEventListener("click", function () {
+    sessionStorage.clear();  // Clears all session storage data
+    window.location.href = "../index.html";  // Redirect to login page
 });

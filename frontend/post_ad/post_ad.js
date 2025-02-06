@@ -51,3 +51,8 @@ document.getElementById("post-ad-form").addEventListener("submit", async functio
         console.error("An error occurred while posting the ad:", err);
     }
 });
+document.getElementById("logout-btn").addEventListener("click", function () {
+    sessionStorage.clear();  // Clears all session storage data
+    window.location.href = "../index.html";  // Redirect to login page
+});
+
