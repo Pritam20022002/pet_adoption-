@@ -31,7 +31,7 @@ document.getElementById("post-ad-form").addEventListener("submit", async functio
     formData.append("user_id", user_id);
 
     try {
-        const response = await fetch("http://localhost:5000/ads", {
+        const response = await fetch("https://petadopt-jv77.onrender.com/ads", {
             method: "POST",
             body: formData // No need to set headers manually with FormData
         });

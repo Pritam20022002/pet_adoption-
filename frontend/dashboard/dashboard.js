@@ -8,7 +8,7 @@ window.onload = async function () {
     }
 
     try {
-        const response = await fetch(`http://localhost:5000/dashboard?user_id=${userId}`);
+        const response = await fetch(`https://petadopt-jv77.onrender.com/dashboard?user_id=${userId}`);
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -44,7 +44,7 @@ function displayAds(ads) {
                 <p>Contact: ${ad.contact_details}</p>
                 <button onclick="deleteAd(${ad.id})">Remove AD</button>
             </div>
-            <img src="http://localhost:5000/ads/${ad.id}/image" alt="Pet Image" class="ad-image">
+            <img src="https://petadopt-jv77.onrender.com/ads/${ad.id}/image" alt="Pet Image" class="ad-image">
         `;
     
         container.appendChild(adElement);
@@ -57,7 +57,7 @@ function displayAds(ads) {
 
 async function deleteAd(adId) {
     try {
-        const response = await fetch(`http://localhost:5000/ads/${adId}`, {
+        const response = await fetch(`https://petadopt-jv77.onrender.com/ads/${adId}`, {
             method: "DELETE"
         });
 

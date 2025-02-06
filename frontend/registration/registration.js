@@ -5,7 +5,7 @@ document.getElementById("register-form").addEventListener("submit", async functi
     const mobile_number = document.getElementById("mobile_number").value;
     const password = document.getElementById("password").value;
 
-    const response = await fetch("http://localhost:5000/register", {
+    const response = await fetch("https://petadopt-jv77.onrender.com/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, mobile_number, password }),

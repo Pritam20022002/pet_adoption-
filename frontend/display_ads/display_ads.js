@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("page-title").textContent = `Available ads for ${petType.charAt(0).toUpperCase() + petType.slice(1)} adoption`;
 
     try {
-        const response = await fetch(`http://localhost:5000/ads?petType=${petType}`);
+        const response = await fetch(`https://petadopt-jv77.onrender.com/ads?petType=${petType}`);
         const ads = await response.json();
 
         const adsContainer = document.getElementById("ads-container");
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <p><strong>Contact:</strong> ${ad.contact_details}</p>
             </div>
             <div class="ad-image">
-                <img src="http://localhost:5000/ads/${ad.id}/image" alt="${ad.pet_name}">
+                <img src="https://petadopt-jv77.onrender.com/ads/${ad.id}/image" alt="${ad.pet_name}">
             </div>
         `;
 
