@@ -108,10 +108,12 @@ button:hover {
     justify-content: space-between;  /* Distribute space between text and logos */
     align-items: center; /* Center the content */
     padding: 20px;
+    transition: border 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 .animal:hover{
-    border: 5px solid #ff9800;
-    padding: 30px;
+
+    border: 5px solid red;
+    padding: 30px;    
 }
 
 #dog {
