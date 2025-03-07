@@ -203,16 +203,18 @@ button:hover {
 
     .right-side img {
         width: 100%; /* Full width image on very small screens */
+        margin-top: 80px;
     }
 
     .bottom-options {
-        flex-direction: column;
+        flex-direction: row;
         justify-content: space-between;
     }
 
     .animal {
-        width: 100%;  /* Full width animal cards */
-        margin-top: 10px;
+        width: 100%;
+        height: 20%;  
+        margin-top: 20px;
     }
 
     .animal_logo {

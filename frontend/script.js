@@ -1,6 +1,6 @@
 document.getElementById("login-form").addEventListener("submit", async function (e) {
     e.preventDefault();
-
+    document.getElementById("loading").innerText="Loading...";
     const mobile_number = document.getElementById("mobile_number").value;
     const password = document.getElementById("password").value;
 
